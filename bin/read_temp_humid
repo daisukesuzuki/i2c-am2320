@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+
+$:.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
+require 'i2c/drivers/am2320'
+
+trap('INT'){
+  exit
+}
+
+sensor = AM2320.new('/dev/i2c-1')
+
+humid, temp = sensor.read
+
+puts "temp: #{temp}, humid: #{humid}"
