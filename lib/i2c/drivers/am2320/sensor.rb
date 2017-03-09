@@ -39,6 +39,7 @@ module I2C
                     # Check if negative or not.
                     if (temp_h > 0x7F)
                         temp *= -1
+                    end
 
                     # Calculate CRC
                     crc = crc16(sensor_data[0,6].bytes)
