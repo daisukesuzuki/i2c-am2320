@@ -35,7 +35,10 @@ module I2C
 
                     orig_crc = (crc_h << 8) | crc_l
                     hum = (hum_h << 8) | hum_l
-                    temp = (temp_h << 8) | temp_l
+                    temp = ((temp_h & 0x7F) << 8) | temp_l
+                    # Check if negative or not.
+                    if (temp_h > 0x7F)
+                        temp *= -1
 
                     # Calculate CRC
                     crc = crc16(sensor_data[0,6].bytes)
